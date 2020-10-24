@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Blocks.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20201023161518_GameTableInit")]
+    [Migration("20201023164938_GameTableInit")]
     partial class GameTableInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,8 +66,8 @@ namespace Blocks.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("Path")
-                        .HasColumnType("bytea");
+                    b.Property<string>("Path")
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");

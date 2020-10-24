@@ -64,8 +64,8 @@ namespace Blocks.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("Path")
-                        .HasColumnType("bytea");
+                    b.Property<string>("Path")
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
