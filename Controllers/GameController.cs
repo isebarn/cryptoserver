@@ -26,21 +26,13 @@ namespace Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGame()
         {
-            return await _context.Games.Include(x => x.User).ToListAsync();
+            return await _context.Games.Where(y => y.Active).Include(x => x.User).ToListAsync();
         }
 
-        // GET: api/Game/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Game>> GetGame(int id)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<Game>>> GetDeveloperGames(int userId)
         {
-            var Game = await _context.Games.Include(x => x.User).FirstOrDefaultAsync(item => item.Id == id);
-
-            if (Game == null)
-            {
-                return NotFound();
-            }
-
-            return Game;
+            return await _context.Games.Where(y => y.UserId == userId).Include(x => x.User).ToListAsync();
         }
 
         [AllowAnonymous]
@@ -52,7 +44,7 @@ namespace Controllers
                 // create game
                 _context.Games.Add(model);
                 _context.SaveChanges();
-                return Ok();
+                return Ok(model.Id);
             }
             catch (Exception ex)
             {
